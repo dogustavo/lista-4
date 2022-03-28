@@ -1,4 +1,4 @@
-import { openDb } from '../config/connection'
+import { PeopleRepository } from '../repositories'
 
 interface IPerson {
   first_name: string
@@ -8,15 +8,15 @@ interface IPerson {
 }
 
 export class PeopleService {
-  async create(props: IPerson) {
-    const { first_name, second_name, document, age } = props
+  private people: PeopleRepository
 
+  constructor() {
+    this.people = new PeopleRepository()
+  }
+
+  async create(person: IPerson) {
     try {
-      const db = await openDb
-      await db.run(
-        'INSERT INTO people (first_name, second_name, document, age) VALUES (?,?,?,?)',
-        [first_name, second_name, document, age]
-      )
+      await this.people.create(person)
 
       return {
         status: 200,
@@ -29,9 +29,7 @@ export class PeopleService {
 
   async select() {
     try {
-      const db = await openDb
-
-      const result = await db.all(`SELECT * FROM people`)
+      const result = await this.people.select()
 
       return result
     } catch (error) {
@@ -41,12 +39,7 @@ export class PeopleService {
 
   async getPersonById(id: number) {
     try {
-      const db = await openDb
-
-      const result = await db.get(
-        `SELECT * FROM people WHERE id = ?`,
-        id
-      )
+      const result = await this.people.getPersonById(id)
 
       return result
     } catch (error) {
