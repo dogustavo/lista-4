@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS cars (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  car_type TEXT NOT NULL,
+  color TEXT NOT NULL,
+  qty_passengers TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS people (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  first_name TEXT NOT NULL,
+  second_name TEXT NOT NULL,
+  document TEXT NOT NULL,
+  age INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS stock (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  product_name TEXT NOT NULL,
+  product_desc TEXT NOT NULL,
+  product_qty INT NOT NULL,
+  product_price FLOAT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS school (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  student_name TEXT NOT NULL,
+  student_ra TEXT NOT NULL,
+  student_score FLOAT NOT NULL
+);
+
