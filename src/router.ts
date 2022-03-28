@@ -8,9 +8,22 @@ import {
 
 const router = Router()
 
-router.post('/person', new PeopleController().create)
-router.get('/person', new PeopleController().select)
-router.get('/person/:id', new PeopleController().getPersonById)
+function getControllerInstance(controller: any, method: string) {
+  return controller[method].bind(controller)
+}
+
+router.post(
+  '/person',
+  getControllerInstance(PeopleController, 'create')
+)
+router.get(
+  '/person',
+  getControllerInstance(PeopleController, 'select')
+)
+router.get(
+  '/person/:id',
+  getControllerInstance(PeopleController, 'getPersonById')
+)
 
 router.post('/car', new CarsController().create)
 router.get('/car', new CarsController().select)

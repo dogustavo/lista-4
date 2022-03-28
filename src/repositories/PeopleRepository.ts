@@ -1,11 +1,5 @@
 import { openDb } from '../config/connection'
-
-interface IPerson {
-  first_name: string
-  second_name: string
-  document: string
-  age: number
-}
+import { IPerson } from '../types'
 
 export class PeopleRepository {
   async create(props: IPerson) {

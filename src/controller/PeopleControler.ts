@@ -2,12 +2,14 @@ import { Request, Response } from 'express'
 
 import { PeopleService } from '../services'
 
-export class PeopleController {
-  async create(request: Request, response: Response) {
-    const service = new PeopleService()
+class PeopleController {
+  constructor(private peopleService: PeopleService) {
+    this.peopleService = new PeopleService()
+  }
 
+  async create(request: Request, response: Response) {
     try {
-      const result = await service.create(request.body)
+      const result = await this.peopleService.create(request.body)
 
       return response
         .status(result.status)
@@ -20,9 +22,8 @@ export class PeopleController {
   }
 
   async select(request: Request, response: Response) {
-    const service = new PeopleService()
     try {
-      const result = await service.select()
+      const result = await this.peopleService.select()
 
       return response.json({ data: result })
     } catch (error) {
@@ -35,10 +36,10 @@ export class PeopleController {
   async getPersonById(request: Request, response: Response) {
     const { id } = request.params
 
-    const service = new PeopleService()
-
     try {
-      const result = await service.getPersonById(parseInt(id))
+      const result = await this.peopleService.getPersonById(
+        parseInt(id)
+      )
 
       return response.json({ data: result })
     } catch (error) {
@@ -48,3 +49,5 @@ export class PeopleController {
     }
   }
 }
+
+export default new PeopleController(new PeopleService())

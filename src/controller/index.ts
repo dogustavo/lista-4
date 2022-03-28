@@ -1,4 +1,4 @@
-import { PeopleController } from './PeopleControler'
+import PeopleController from './PeopleControler'
 import { CarsController } from './CarsControler'
 import { StockController } from './StockControler'
 import { SchoolController } from './SchoolControler'

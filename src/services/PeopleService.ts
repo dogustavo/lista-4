@@ -1,11 +1,5 @@
 import { PeopleRepository } from '../repositories'
-
-interface IPerson {
-  first_name: string
-  second_name: string
-  document: string
-  age: number
-}
+import { IPerson } from '../types'
 
 export class PeopleService {
   private people: PeopleRepository
