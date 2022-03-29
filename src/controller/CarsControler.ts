@@ -2,16 +2,16 @@ import { Request, Response } from 'express'
 
 import { CarsService } from '../services'
 
-export class CarsController {
+class CarsController {
+  constructor(private carService: CarsService) {
+    this.carService = new CarsService()
+  }
+
   async create(request: Request, response: Response) {
-    const service = new CarsService()
-
     try {
-      const result = await service.create(request.body)
+      const result = await this.carService.create(request.body)
 
-      return response
-        .status(result.status)
-        .json({ message: result.message })
+      return response.json({ message: result.message })
     } catch (error) {
       response.status(417).send({
         message: error.message
@@ -20,9 +20,8 @@ export class CarsController {
   }
 
   async select(request: Request, response: Response) {
-    const service = new CarsService()
     try {
-      const result = await service.select()
+      const result = await this.carService.select()
 
       return response.json({ data: result })
     } catch (error) {
@@ -35,10 +34,8 @@ export class CarsController {
   async getCarById(request: Request, response: Response) {
     const { id } = request.params
 
-    const service = new CarsService()
-
     try {
-      const result = await service.getCarById(parseInt(id))
+      const result = await this.carService.getCarById(parseInt(id))
 
       return response.json({ data: result })
     } catch (error) {
@@ -48,3 +45,5 @@ export class CarsController {
     }
   }
 }
+
+export default new CarsController(new CarsService())

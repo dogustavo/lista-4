@@ -25,9 +25,12 @@ router.get(
   getControllerInstance(PeopleController, 'getPersonById')
 )
 
-router.post('/car', new CarsController().create)
-router.get('/car', new CarsController().select)
-router.get('/car/:id', new CarsController().getCarById)
+router.post('/car', getControllerInstance(CarsController, 'create'))
+router.get('/car', getControllerInstance(CarsController, 'select'))
+router.get(
+  '/car/:id',
+  getControllerInstance(CarsController, 'getCarById')
+)
 
 router.post('/stock', new StockController().create)
 router.get('/stock', new StockController().select)

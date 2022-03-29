@@ -1,26 +1,18 @@
-import { openDb } from '../config/connection'
-
-interface IPerson {
-  car_type: string
-  color: string
-  qty_passengers: number
-}
+import { CarsRepository } from '../repositories'
+import { ICar } from '../types'
 
 export class CarsService {
-  async create(props: IPerson) {
-    const { car_type, color, qty_passengers } = props
+  private cars: CarsRepository
 
+  constructor() {
+    this.cars = new CarsRepository()
+  }
+
+  async create(props: ICar) {
     try {
-      const db = await openDb
-      await db.run(
-        'INSERT INTO cars (car_type, color, qty_passengers) VALUES (?,?,?)',
-        [car_type, color, qty_passengers]
-      )
+      const result = await this.cars.create(props)
 
-      return {
-        status: 200,
-        message: 'Salvo com sucesso'
-      }
+      return result
     } catch (error) {
       throw new Error(error)
     }
@@ -28,9 +20,7 @@ export class CarsService {
 
   async select() {
     try {
-      const db = await openDb
-
-      const result = await db.all(`SELECT * FROM cars`)
+      const result = await this.cars.select()
 
       return result
     } catch (error) {
@@ -40,12 +30,7 @@ export class CarsService {
 
   async getCarById(id: number) {
     try {
-      const db = await openDb
-
-      const result = await db.get(
-        `SELECT * FROM cars WHERE id = ?`,
-        id
-      )
+      const result = await this.cars.getCarById(id)
 
       return result
     } catch (error) {

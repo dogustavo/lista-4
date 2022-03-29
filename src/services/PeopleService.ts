@@ -10,12 +10,9 @@ export class PeopleService {
 
   async create(person: IPerson) {
     try {
-      await this.people.create(person)
+      const result = await this.people.create(person)
 
-      return {
-        status: 200,
-        message: 'Salvo com sucesso'
-      }
+      return result
     } catch (error) {
       throw new Error(error)
     }
