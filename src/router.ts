@@ -2,8 +2,8 @@ import { Router } from 'express'
 import {
   PeopleController,
   CarsController,
-  StockController,
-  SchoolController
+  SchoolController,
+  StockController
 } from './controller'
 
 const router = Router()
@@ -32,12 +32,21 @@ router.get(
   getControllerInstance(CarsController, 'getCarById')
 )
 
+router.post(
+  '/school',
+  getControllerInstance(SchoolController, 'create')
+)
+router.get(
+  '/school',
+  getControllerInstance(SchoolController, 'select')
+)
+router.get(
+  '/school/:id',
+  getControllerInstance(SchoolController, 'getStudent')
+)
+
 router.post('/stock', new StockController().create)
 router.get('/stock', new StockController().select)
 router.get('/stock/:id', new StockController().getStockItem)
-
-router.post('/school', new SchoolController().create)
-router.get('/school', new SchoolController().select)
-router.get('/school/:id', new SchoolController().getStudent)
 
 export { router }

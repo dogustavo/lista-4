@@ -1,11 +1,11 @@
 import PeopleController from './PeopleControler'
 import CarsController from './CarsControler'
+import SchoolController from './SchoolControler'
 import { StockController } from './StockControler'
-import { SchoolController } from './SchoolControler'
 
 export {
   PeopleController,
   CarsController,
-  StockController,
-  SchoolController
+  SchoolController,
+  StockController
 }
