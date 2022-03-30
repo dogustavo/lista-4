@@ -45,8 +45,14 @@ router.get(
   getControllerInstance(SchoolController, 'getStudent')
 )
 
-router.post('/stock', new StockController().create)
-router.get('/stock', new StockController().select)
-router.get('/stock/:id', new StockController().getStockItem)
+router.post(
+  '/stock',
+  getControllerInstance(StockController, 'create')
+)
+router.get('/stock', getControllerInstance(StockController, 'select'))
+router.get(
+  '/stock/:id',
+  getControllerInstance(StockController, 'getStockItem')
+)
 
 export { router }
