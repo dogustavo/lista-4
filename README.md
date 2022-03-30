@@ -64,7 +64,7 @@ curl --request POST \
 	"product_name": "Balas",
 	"product_desc": "Lorem ipsum dolor sit amet",
 	"product_qty": 12,
-	"product_price": 5.70
+	"product_price": 0.70
 }
 '
 ```
